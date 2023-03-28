@@ -1,0 +1,6 @@
+Flask
+WTForms
+SQLAlchemy
+bcrypt
+requests
+gunicorn
