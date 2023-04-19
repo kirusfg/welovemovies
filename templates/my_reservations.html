@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{% include "navbar.html" %}
+<div class="container is-80">
+  <h1 class="title">My Reservations</h1>
+  {% if reservations %}
+    {% for reservation in reservations %}
+      <div class="card">
+        <div class="card-content">
+          <div class="columns">
+            <div class="column is-two-fifths">
+              <div class="card">
+                <div class="card-image">
+                  <figure class="image is-4by3">
+                    <img src="{{ reservation.room.image_url }}" alt="{{ reservation.room.name }}">
+                  </figure>
+                </div>
+              </div>
+            </div>
+            <div class="column">
+              <h1 class="title">{{ reservation.room.name }}</h1>
+              <p class="subtitle">{{ reservation.room.description }}</h2>
+              <br>
+              <div class="content">
+                <p><strong>Number of seats:</strong> {{ reservation.room.number_of_seats }}</p>
+                <p><strong>Date:</strong> {{ reservation.start_time.strftime('%m/%d/%Y') }}</p>
+                <p><strong>From:</strong> {{ reservation.start_time.strftime('%H:%M') }}</p>
+                <p><strong>To:</strong> {{ reservation.end_time.strftime('%H:%M') }}</p>
+              </div>
+              <a href="/cancel/{{ reservation.id }}" class="button is-danger is-narrow">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>You have no reservations.</p>
+  {% endif %}
+</div>
+{% endblock %}

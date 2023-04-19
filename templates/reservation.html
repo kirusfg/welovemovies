@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block body %}
+{% include "navbar.html" %}
+<div class="container">
+  <div class="columns">
+    <div class="column is-two-fifths">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image is-4by3">
+            <img src="{{ room.image_url }}" alt="{{ room.name }}">
+          </figure>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <h1 class="title">{{ room.name }}</h1>
+      <p class="subtitle">{{ room.description }}</h2>
+      <br>
+      <form action="{{ url_for('reservation', room_id=room.id) }}" method="POST">
+        <input type="hidden" name="room_id" value="{{ room.id }}">
+        <div class="field">
+          <label class="label">Date</label>
+          <div class="control">
+            <input class="input" type="date" name="date" required>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Start Time</label>
+          <div class="control">
+            <input class="input" type="time" name="start_time" required>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">End Time</label>
+          <div class="control">
+            <input class="input" type="time" name="end_time" required>
+          </div>
+        </div>
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-link">Make Reservation</button>
+          </div>
+          <div class="control">
+            <a href="{{ url_for('rooms') }}" class="button is-text">Cancel</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="../static/js/scripts.js"></script>
+{% endblock %}
